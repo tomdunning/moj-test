@@ -28,4 +28,20 @@ RSpec.describe DictionaryEntry, type: :model do
       end
     end
   end
+
+
+  describe '#sort_word' do
+    let(:params) { { word: 'crepitus' } }
+    it 'sets the char_sorted_word' do
+      expect(subject.sort_word).to eq('ceiprstu')
+    end
+
+    context 'with special characters' do
+      let(:params) { { word: "he's!" } }
+      it 'sets the char_sorted_word' do
+        subject.sort_word
+        expect(subject.sort_word).to eq("!'ehs")
+      end
+    end
+  end
 end
