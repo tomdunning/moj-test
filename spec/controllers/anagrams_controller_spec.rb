@@ -2,6 +2,15 @@ require 'rails_helper'
 
 RSpec.describe AnagramsController, type: :controller do
 
+
+  before :each do
+    DictionaryEntry.delete_all
+  end
+
+  after :each do
+    DictionaryEntry.delete_all
+  end
+
   describe "GET #index" do
     context 'without a word' do
       it "returns http unprocessable entity" do
@@ -13,14 +22,9 @@ RSpec.describe AnagramsController, type: :controller do
     context 'with one word' do
       let(:db_words) { ["cuprites","pictures","piecrust", "crepitus"] }
 
-
-      before do
-        db_words.each do |word|
-          DictionaryEntry.create!(word: word)
-        end
-      end
-
       it 'returns anagrams for the words, excluding self' do
+        create_dictionary_words(db_words)
+
         get :index, params: { words: ['crepitus'] }
 
         expect(response).to have_http_status(:success)

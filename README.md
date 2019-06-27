@@ -36,3 +36,13 @@ See the example below:
 
     GET /sdfwehrtgegfg
     {"sdfwehrtgegfg":[]}
+
+
+Solution
+========
+
+The word list can be imported into the dictionary with:
+
+`rake import:dictionary wordlist.txt`
+
+It's worth noting that I'd never put params such as words directly into the path, I'd use RESTful routs and parameters. The current implementation would be very hard to extend if there were other applications for the same data.
