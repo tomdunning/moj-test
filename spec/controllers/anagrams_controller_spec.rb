@@ -11,13 +11,22 @@ RSpec.describe AnagramsController, type: :controller do
     end
 
     context 'with one word' do
-      it 'returns anagrams for the word' do
+      let(:db_words) { ["cuprites","pictures","piecrust", "crepitus"] }
+
+
+      before do
+        db_words.each do |word|
+          DictionaryEntry.create!(word: word)
+        end
+      end
+
+      it 'returns anagrams for the words, excluding self' do
         get :index, params: { words: ['crepitus'] }
-        debugger
+
         expect(response).to have_http_status(:success)
         json_response = JSON.parse(response.body)
         expect(json_response).to eq({
-          'crepitus' => []
+          'crepitus' => ["cuprites","pictures","piecrust"]
         })
       end
     end

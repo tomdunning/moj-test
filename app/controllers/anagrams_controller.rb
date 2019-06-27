@@ -8,7 +8,7 @@ class AnagramsController < ApplicationController
 
     results = {}
     params[:words].each do |word|
-      results[word] = DictionaryEntry.where(char_sorted_word: sorted_word(word)).pluck(:word)
+      results[word] = DictionaryEntry.where(char_sorted_word: sorted_word(word)).where.not(word: word).pluck(:word)
     end
 
     render json: results, status: :ok
