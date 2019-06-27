@@ -21,7 +21,8 @@ RSpec.describe "Acceptance Tests", type: :request do
         "kinship":["pinkish"],
         "enlist":["elints","inlets","listen","silent","tinsel"],
         "boaster":["boaters","borates","rebatos","sorbate"],
-        "fresher":["refresh"],"sinks":["skins"],
+        "fresher":["refresh"],
+        "sinks":["skins"],
         "knits":["skint","stink","tinks"],
         "sort":["orts","rots","stor","tors"]
       })
@@ -34,6 +35,16 @@ RSpec.describe "Acceptance Tests", type: :request do
       expect(response).to have_http_status(200)
       json_response = JSON.parse(response.body)
       expect(json_response).to eq({"sdfwehrtgegfg":[]})
+    end
+  end
+
+
+  describe "GET /he's" do
+    it "works! (now write some real specs)" do
+      get root_path("he's")
+      expect(response).to have_http_status(200)
+      json_response = JSON.parse(response.body)
+      expect(json_response).to eq({"he's":[]})
     end
   end
 end
