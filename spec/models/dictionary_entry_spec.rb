@@ -22,9 +22,8 @@ RSpec.describe DictionaryEntry, type: :model do
 
     context 'without a char_sorted_word' do
       let(:params) { { word: 'crepitus', char_sorted_word: ''} }
-      it 'returns an error' do
-        expect(subject).not_to be_valid
-        expect(subject.errors[:char_sorted_word]).to include("can't be blank")
+      it 'is assigned and is valid' do
+        expect(subject).to be_valid
       end
     end
   end
@@ -39,7 +38,6 @@ RSpec.describe DictionaryEntry, type: :model do
     context 'with special characters' do
       let(:params) { { word: "he's!" } }
       it 'sets the char_sorted_word' do
-        subject.sort_word
         expect(subject.sort_word).to eq("!'ehs")
       end
     end
